@@ -1,3 +1,4 @@
 module.exports = {
-    Tour: require('./Tour')
+    User: require('./User'),
+    Tour: require('./Tour'),
 }

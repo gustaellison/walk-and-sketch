@@ -1,20 +1,21 @@
 const express = require('express')
 const router = express.Router()
+const middleware = require('../middleware')
 
-const peopleCtrl = require('../controllers/tours')
+const toursCtrl = require('../controllers/tours')
 
 
 //INDEX ROUTE
-router.get("/", peopleCtrl.index)
+router.get("/", toursCtrl.index)
 
 // CREATE ROUTE
-router.post("/", peopleCtrl.create)
+router.post("/", toursCtrl.create)
 
 //TOUR SHOW ROUTE
-router.get("/:id", peopleCtrl.show)
+router.get("/:id", toursCtrl.show)
 
-router.delete("/:id", peopleCtrl.delete)
+router.delete("/:id", toursCtrl.delete)
 
-router.put("/:id", peopleCtrl.update)
+router.put("/:id", toursCtrl.update)
 
 module.exports = router
