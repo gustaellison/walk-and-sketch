@@ -8,11 +8,11 @@ const Login = async (req, res) => {
         const user = await User.findOne({email})
         let matched = await middleware.comparePassword(user.passwordDigest, password)
         if(matched) {
-            let payload = {id: user.id, email: user.email}
+            let payload = {id: user.id, email: user.email, name: user.name}
             let token = middleware.createToken(payload)
             return res.send(({user: payload, token}))
         }
-        res.status(401).send({sttaus: 'Error', msg: 'Unauthorized!'})  
+        res.status(401).send({status: 'Error', msg: 'Unauthorized!'})  
     } catch (error) {
         console.log(error)
         res.status(401).send({status: "Error", msg: "An error has occured!"})
