@@ -8,7 +8,7 @@ const Login = async (req, res) => {
         const user = await User.findOne({email})
         let matched = await middleware.comparePassword(user.passwordDigest, password)
         if(matched) {
-            let payload = {id: user.id, email: user.email, name: user.name}
+            let payload = {id: user.id, email: user.email, name: user.name, adminStatus: user.adminStatus}
             let token = middleware.createToken(payload)
             return res.send(({user: payload, token}))
         }
@@ -21,7 +21,7 @@ const Login = async (req, res) => {
 
 const Register = async (req, res) => {
     try {
-        const { email, password, name } = req.body
+        const { email, password, name, adminStatus } = req.body
         let passwordDigest = await middleware.hashPassword(password)
         console.log(email)
         let existingUser = await User.findOne({ email })
@@ -29,7 +29,7 @@ const Register = async (req, res) => {
             return res.status(400).send("A user with that email has already been registered!")
         } else {
             // Creates a new user
-            const user = await User.create({ name, email, passwordDigest })
+            const user = await User.create({ name, email, passwordDigest, adminStatus })
             // Sends the user as a response
             res.send(user)
         }
