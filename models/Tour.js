@@ -8,9 +8,7 @@ const tourSchema = new Schema({
         minutes: Number
     },
     type: String,
-    day:{
-    enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    },
+    day: String,
     time: String,
     image: String,
     trailName: String,
