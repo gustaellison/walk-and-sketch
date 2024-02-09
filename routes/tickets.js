@@ -30,25 +30,30 @@ router.get("/", function (req, res, next) {
 })
 
 // CREATE ROUTE
-router.post("/", function (req, res, next) {
-    const { date, tourId, userIds } = req.body; // Assuming you're sending date, tourId, and userIds in the request body
-    const newTicket = new Ticket({
+router.post('/', function (req, res, next) {
+    const { date, _tour, _users } = req.body
+    Ticket.findOneAndUpdate({
         date: date,
-        _tour: tourId,
-        _users: userIds
-    });
-
-    newTicket.save()
-        .then(ticket => {
-            res.status(201).json(ticket);
+        _tour: _tour
+    },
+        { $push: { _users: _users } },
+        { upsert: true, new: true })
+        .then(tour => {
+            res.json(tour);
         })
         .catch(err => {
-            res.status(400).json({ message: err.message });
+            res.json({ message: err.message })
         });
 });
 
 //Ticket SHOW ROUTE
-router.get("/:id", ticketsCtrl.show)
+router.get('/:id', function (req, res, next) {
+    const { id } = req.params;
+    Ticket.findById(id)
+        .then(ticket => {
+            res.json(ticket);
+        });
+});
 
 router.delete("/:id",
     middleware.stripToken,
