@@ -9,12 +9,9 @@ const Ticket = require('../models/Ticket')
 
 //INDEX ROUTE
 router.get("/", function (req, res, next) {
-    const { date, tour, user } = req.body
+    const { tour, user } = req.body
     let conditions = {}
 
-    if (date) {
-        conditions.date = date
-    }
     if (tour) {
         conditions._tour = tour
     }
@@ -23,7 +20,7 @@ router.get("/", function (req, res, next) {
     }
 
     Ticket.find(conditions)
-        .populate('_tour _users')
+        .populate('_tour _user')
         .then(tickets => {
             res.json(tickets)
         })
@@ -31,13 +28,11 @@ router.get("/", function (req, res, next) {
 
 // CREATE ROUTE
 router.post('/', function (req, res, next) {
-    const { date, _tour, _users } = req.body
+    const { _tour, _user } = req.body
     Ticket.findOneAndUpdate({
-        date: date,
-        _tour: _tour
-    },
-        { $push: { _users: _users } },
-        { upsert: true, new: true })
+        _tour: _tour,
+        _user: _user
+    },)
         .then(tour => {
             res.json(tour);
         })
