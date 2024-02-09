@@ -12,6 +12,7 @@ const app = express();
 
 const AuthRouter = require('./routes/AuthRouter')
 const toursRouter = require('./routes/tours')
+const ticketsRouter = require('./routes/tickets')
 
 //Middleware
 app.use(express.urlencoded({extended:true}))
@@ -21,6 +22,7 @@ app.use(morgan("dev"))
 
 app.use('/auth', AuthRouter)
 app.use('/tours', toursRouter)
+app.use('/tickets', ticketsRouter)
 
 app.get("/", (req, res) =>{
     res.send("Hello World")
