@@ -29,7 +29,7 @@ router.get("/", function (req, res, next) {
 // CREATE ROUTE
 router.post('/', function (req, res, next) {
     const { _tour, _user } = req.body
-    Ticket.findOneAndUpdate({
+    Ticket.create({
         _tour: _tour,
         _user: _user
     },)
