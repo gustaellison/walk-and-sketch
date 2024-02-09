@@ -8,7 +8,7 @@ const tourSchema = new Schema({
         minutes: Number
     },
     type: String,
-    day: String,
+    date: Date,
     time: String,
     image: String,
     trailName: String,
