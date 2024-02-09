@@ -3,7 +3,7 @@ const { Ticket } = require('../models')
 
 const index = async(req,res,next) => {
     try {
-        res.json(await Ticket.find({}).populate('_tour'))
+        res.json(await Ticket.find({}).populate('_tour _user'))
     } catch (error) {
         res.status(400).json(error)
     }

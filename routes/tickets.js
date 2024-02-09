@@ -8,23 +8,7 @@ const Ticket = require('../models/Ticket')
 
 
 //INDEX ROUTE
-router.get("/", function (req, res, next) {
-    const { tour, user } = req.body
-    let conditions = {}
-
-    if (tour) {
-        conditions._tour = tour
-    }
-    if (user) {
-        conditions._users = user
-    }
-
-    Ticket.find(conditions)
-        .populate('_tour _user')
-        .then(tickets => {
-            res.json(tickets)
-        })
-})
+router.get("/", ticketsCtrl.index)
 
 // CREATE ROUTE
 router.post('/', function (req, res, next) {
