@@ -6,7 +6,5 @@ const ticketSchema = new Schema({
     _user: { type: Schema.Types.ObjectId, ref: "User", required: true }
     }, { timestamps: true })
 
-    ticketSchema.index({ date: 1, _tour: 1, _users: 1 });
-
 
 module.exports = mongoose.model("Ticket", ticketSchema)
