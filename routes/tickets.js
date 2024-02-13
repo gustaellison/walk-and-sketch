@@ -41,7 +41,8 @@ router.delete("/:id",
 )
 
 router.put("/:id",
-
+    middleware.stripToken,
+    middleware.verifyToken,
     ticketsCtrl.update
 )
 
