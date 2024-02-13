@@ -3,10 +3,7 @@ const Schema = mongoose.Schema
 
 const tourSchema = new Schema({
     name: String,
-    duration: {
-        hours: Number,
-        minutes: Number
-    },
+    duration: String,
     type: String,
     date: Date,
     time: String,
